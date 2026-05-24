@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import Any, Iterable, List, Optional, Sequence, Tuple
 
-from .attention_visualization import AttnViz
-from .token_embedding import Embedding
-from .positional_encoding import PositionalEncoding
-from .tokenizer import WhitespaceTokenizer
-from .toy_trainer import ToyTrainer
-from .transformer_architecture import TransformerArchitecture
+from ..attention.attention_visualization import AttnViz
+from ..embeddings.token_embedding import Embedding
+from ..embeddings.positional_encoding import PositionalEncoding
+from ..tokenization.tokenizer import WhitespaceTokenizer
+from ..training.toy_trainer import ToyTrainer
+from ..architecture.transformer_architecture import TransformerArchitecture
 from .transformer_outputs import (
     AttentionOutput,
     AttentionPreviews,
@@ -199,28 +199,11 @@ class TransformerPipeline:
 
         for _ in range(limit):
             output = self.forward(source_ids, generated_ids)
-            logits_rows = output.model_output.logits or []
-            if not logits_rows:
-                break
-            next_id = self.embedding.argmax(
-                logits_rows[-1],
-                exclude_ids={self.tokenizer.pad_id, self.tokenizer.bos_id, self.tokenizer.eos_id},
-            )
+            # simple greedy: pick argmax from logits of last position
+            last_logits = output.model_output.logits[-1]
+            next_id = self.embedding.argmax(last_logits)
             if next_id == self.tokenizer.eos_id:
                 break
             generated_ids.append(next_id)
 
-        return self.detokenize(generated_ids[1:])
-
-    def translate(self, source_text: str, max_steps: Optional[int] = None) -> str:
-        return self.generate(source_text, max_steps=max_steps)
-
-    def forward_batch(self, batch: Sequence[Tuple[Sequence[int], Sequence[int]]]) -> List[PipelineForwardOutput]:
-        return [self.forward(src_ids, tgt_ids) for src_ids, tgt_ids in batch]
-
-    def translate_batch(self, source_texts: Sequence[str], max_steps: Optional[int] = None) -> List[str]:
-        return [self.translate(text, max_steps=max_steps) for text in source_texts]
-
-
-PipelineConfig = TransformerPipelineConfig
-Pipeline = TransformerPipeline
+        return self.detokenize(generated_ids)

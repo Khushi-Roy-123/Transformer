@@ -1,7 +1,7 @@
-from .decoder import TransformerDecoder
 from .encoder import TransformerEncoder
-from .attention_visualization import AttnViz
-from .transformer_outputs import AttentionOutput, TransformerOutput
+from .decoder import TransformerDecoder
+from ..attention.attention_visualization import AttnViz
+from ..pipeline.transformer_outputs import AttentionOutput, TransformerOutput
 
 
 class TransformerArchitecture:

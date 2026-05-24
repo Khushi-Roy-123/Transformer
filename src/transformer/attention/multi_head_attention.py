@@ -1,4 +1,4 @@
-from .attention_mechanism import SAttn
+from .scaled_dot_product_attention import SAttn
 
 
 class MHAttn:

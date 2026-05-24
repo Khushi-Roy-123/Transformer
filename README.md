@@ -51,6 +51,23 @@ Output
 ```text
 transformer/
 │
+├── architecture/
+│   ├── attention.py
+│   ├── encoder.py
+│   ├── decoder.py
+│   └── transformer.py
+├── embeddings/
+│   ├── token_embedding.py
+│   └── positional_encoding.py
+├── preprocessing/
+│   └── tokenizer.py
+├── pipeline/
+│   ├── outputs.py
+│   └── pipeline.py
+├── training/
+│   └── trainer.py
+├── visualization/
+│   └── attention_visualizer.py
 ├── attention_mechanism.py
 ├── multihead_attention.py
 ├── self_attention.py
@@ -63,6 +80,9 @@ transformer/
 ├── transformer_architecture.py
 ├── transformer_pipeline.py
 ├── attention_visualization.py
+├── token_embedding.py
+├── tokenizer.py
+├── transformer_outputs.py
 ├── toy_trainer.py
 └── __init__.py
 ```

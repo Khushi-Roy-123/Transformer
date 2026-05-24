@@ -1,6 +1,6 @@
-from .layer_normalisation import LNorm
-from .multihead_attention import MHAttn
-from .positional_encoding import PEnc
+from ..utils.math_utils import LNorm
+from ..attention.multi_head_attention import MHAttn
+from ..embeddings.positional_encoding import PEnc
 
 
 class TransformerDecoder:
@@ -16,8 +16,8 @@ class TransformerDecoder:
         self.pos = PEnc()
         self.last_self_attention = None
         self.last_cross_attention = None
-        self.W1 = [[((i + 1) * (j + 1)) * 0.01 for j in range(f)] for i in range(m)]
-        self.W2 = [[((i + 1) * (j + 1) + 5) * 0.01 for j in range(m)] for i in range(f)]
+        self.W1 = [[((i + 1) * (j + 1)) * 0.01 for j in range(self.f)] for i in range(self.m)]
+        self.W2 = [[((i + 1) * (j + 1) + 5) * 0.01 for j in range(self.m)] for i in range(self.f)]
 
     def _fix(self, x):
         y = x[:self.m]

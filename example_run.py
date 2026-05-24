@@ -2,9 +2,10 @@ import os
 import sys
 
 def main():
-    sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-    from transformer.tokenizer import WhitespaceTokenizer
-    from transformer.transformer_pipeline import TransformerPipeline, TransformerPipelineConfig
+    # Prefer src/ directory layout so package imports resolve to src/transformer
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+    from transformer.pipeline import TransformerPipeline, TransformerPipelineConfig
+    from transformer.tokenization import WhitespaceTokenizer
 
     tokenizer = WhitespaceTokenizer()
     tokenizer.fit([
@@ -23,7 +24,7 @@ def main():
     print('logits rows:', len(out.model_output.logits or []))
 
     print('\nGenerated text:')
-    print(pipeline.translate('hello world from transformer'))
+    print(pipeline.generate('hello world from transformer'))
 
     print('\nEncoder attention preview:')
     print(pipeline.attention_preview('encoder'))

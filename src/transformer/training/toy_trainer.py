@@ -3,9 +3,7 @@ class ToyTrainer:
         self.arch = arch
 
     def train_step(self, src, tgt):
-        # placeholder: run forward and return a dummy loss
         out = self.arch.forward(src, tgt)
-        # compute a fake loss as sum of all decoded values (just for demonstration)
         dec = out.decoded
         s = 0.0
         for v in dec:

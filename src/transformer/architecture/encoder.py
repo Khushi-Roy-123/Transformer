@@ -1,6 +1,6 @@
-from .layer_normalisation import LNorm
-from .multihead_attention import MHAttn
-from .positional_encoding import PEnc
+from ..utils.math_utils import LNorm
+from ..attention.multi_head_attention import MHAttn
+from ..embeddings.positional_encoding import PEnc
 
 
 class TransformerEncoder:
