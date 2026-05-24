@@ -1,3 +1,0 @@
-# Architecture
-
-Project architecture documentation.
