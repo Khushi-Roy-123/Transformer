@@ -45,46 +45,55 @@ Output
 ```
 
 ---
+## Architecture Overview
 
-## Project Structure
+This repository provides a from-scratch, dependency-free implementation of Transformer components organized for clarity and learning. The code is located under `src/transformer` and split into focused packages that mirror Transformer concepts.
+
+- **`src/transformer/architecture/`**: high-level encoder/decoder and `transformer_architecture.py` that composes the model (encoder.py, decoder.py, transformer_architecture.py).
+- **`src/transformer/attention/`**: core attention mechanisms and utilities (scaled_dot_product_attention.py, multi_head_attention.py, attention_visualization.py).
+- **`src/transformer/embeddings/`**: token and positional embedding implementations (token_embedding.py, positional_encoding.py).
+- **`src/transformer/tokenization/`**: simple tokenizer abstraction used by examples and pipeline (tokenizer.py).
+- **`src/transformer/pipeline/`**: orchestration and typed outputs for running the model end-to-end (transformer_pipeline.py, transformer_outputs.py).
+- **`src/transformer/training/`**: lightweight trainer and toy training loops (toy_trainer.py).
+- **`src/transformer/utils/`**: small helper utilities for layers and math (layer_utils.py, math_utils.py).
+- **`examples/`**: runnable demos (attention_demo.py, translation_demo.py, example_run.py).
+- **`tests/`**: unit tests for pipeline and components (tests/test_pipeline.py).
+
+## Project Structure (workspace view)
 
 ```text
-transformer/
-│
-├── architecture/
-│   ├── attention.py
-│   ├── encoder.py
-│   ├── decoder.py
-│   └── transformer.py
-├── embeddings/
-│   ├── token_embedding.py
-│   └── positional_encoding.py
-├── preprocessing/
-│   └── tokenizer.py
-├── pipeline/
-│   ├── outputs.py
-│   └── pipeline.py
-├── training/
-│   └── trainer.py
-├── visualization/
-│   └── attention_visualizer.py
-├── attention_mechanism.py
-├── multihead_attention.py
-├── self_attention.py
-├── bahdanau_attention.py
-├── luong_attention.py
-├── encoder.py
-├── decoder.py
-├── positional_encoding.py
-├── layer_normalisation.py
-├── transformer_architecture.py
-├── transformer_pipeline.py
-├── attention_visualization.py
-├── token_embedding.py
-├── tokenizer.py
-├── transformer_outputs.py
-├── toy_trainer.py
-└── __init__.py
+LICENSE
+README.md
+examples/
+	attention_demo.py
+	example_run.py
+	translation_demo.py
+src/
+	transformer/
+		__init__.py
+		architecture/
+			encoder.py
+			decoder.py
+			transformer_architecture.py
+		attention/
+			scaled_dot_product_attention.py
+			multi_head_attention.py
+			attention_visualization.py
+		embeddings/
+			positional_encoding.py
+			token_embedding.py
+		pipeline/
+			transformer_pipeline.py
+			transformer_outputs.py
+		tokenization/
+			tokenizer.py
+		training/
+			toy_trainer.py
+		utils/
+			layer_utils.py
+			math_utils.py
+tests/
+	test_pipeline.py
 ```
 
 ---
