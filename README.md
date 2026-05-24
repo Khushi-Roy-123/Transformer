@@ -20,6 +20,9 @@ This project was built to understand how Transformers work internally without re
 - Luong Attention
 - Attention Visualization
 - Toy Training Pipeline
+- High-level orchestration pipeline
+- Tokenizer and embedding abstraction
+- Typed pipeline outputs
 
 ---
 
@@ -58,6 +61,7 @@ transformer/
 ├── positional_encoding.py
 ├── layer_normalisation.py
 ├── transformer_architecture.py
+├── transformer_pipeline.py
 ├── attention_visualization.py
 ├── toy_trainer.py
 └── __init__.py
@@ -84,12 +88,3 @@ Building transformers manually helped me understand:
 - Intended for educational and research purposes
 
 ---
-
-## Future Improvements
-
-- Tensor abstraction layer
-- Manual backpropagation engine
-- Tokenizer + inference pipeline
-- NumPy acceleration
-- Training visualization tools
-

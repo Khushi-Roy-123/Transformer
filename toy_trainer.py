@@ -6,7 +6,7 @@ class ToyTrainer:
         # placeholder: run forward and return a dummy loss
         out = self.arch.forward(src, tgt)
         # compute a fake loss as sum of all decoded values (just for demonstration)
-        dec = out.get('decoded', [])
+        dec = out.decoded
         s = 0.0
         for v in dec:
             if isinstance(v, list):

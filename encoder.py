@@ -38,9 +38,9 @@ class TransformerEncoder:
             out.append(y)
         return out
 
-    def forward(self, seq, mask=None):
+    def forward(self, seq, mask=None, positions=None):
         seq = [self._fix(v) for v in seq]
-        pos = self.pos.forward(len(seq), self.m)
+        pos = positions if positions is not None else self.pos.forward(len(seq), self.m)
         x = [self._add(seq[i], pos[i]) for i in range(len(seq))]
         a, w = self.attn.forward(x, x, x, mask)
         self.last_attention = w

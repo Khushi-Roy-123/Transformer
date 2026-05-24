@@ -1,6 +1,7 @@
 from .decoder import TransformerDecoder
 from .encoder import TransformerEncoder
 from .attention_visualization import AttnViz
+from .transformer_outputs import AttentionOutput, TransformerOutput
 
 
 class TransformerArchitecture:
@@ -13,32 +14,29 @@ class TransformerArchitecture:
         self.d = [TransformerDecoder(m, f, h) for _ in range(l)]
         self.v = AttnViz()
 
-    def encode(self, s):
+    def encode(self, s, positions=None):
         x = s
         for e in self.e:
-            x = e.forward(x)
+            x = e.forward(x, positions=positions)
         return x
 
-    def decode(self, t, e):
+    def decode(self, t, e, positions=None):
         x = t
         for d in self.d:
-            x = d.forward(x, e)
+            x = d.forward(x, e, positions=positions)
         return x
 
-    def forward(self, s, t):
-        e = self.encode(s)
-        d = self.decode(t, e)
-        return {
-            "encoded": e,
-            "decoded": d,
-        }
+    def forward(self, s, t, source_positions=None, target_positions=None):
+        e = self.encode(s, positions=source_positions)
+        d = self.decode(t, e, positions=target_positions)
+        return TransformerOutput(encoded=e, decoded=d, attention=self.attention())
 
     def attention(self):
-        return {
-            "encoder": self.e[-1].attention() if self.e else None,
-            "decoder_self": self.d[-1].last_self_attention if self.d else None,
-            "decoder_cross": self.d[-1].last_cross_attention if self.d else None,
-        }
+        return AttentionOutput(
+            encoder=self.e[-1].attention() if self.e else None,
+            decoder_self=self.d[-1].last_self_attention if self.d else None,
+            decoder_cross=self.d[-1].last_cross_attention if self.d else None,
+        )
 
     def visualize_attention(self, weights=None, labels=None):
         if weights is None:

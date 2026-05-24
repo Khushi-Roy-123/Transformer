@@ -44,10 +44,10 @@ class TransformerDecoder:
     def causal_mask(self, n):
         return [[1 if j <= i else 0 for j in range(n)] for i in range(n)]
 
-    def forward(self, tgt, enc):
+    def forward(self, tgt, enc, positions=None):
         tgt = [self._fix(v) for v in tgt]
         enc = [self._fix(v) for v in enc]
-        pos = self.pos.forward(len(tgt), self.m)
+        pos = positions if positions is not None else self.pos.forward(len(tgt), self.m)
         x = [self._add(tgt[i], pos[i]) for i in range(len(tgt))]
 
         cm = self.causal_mask(len(x))

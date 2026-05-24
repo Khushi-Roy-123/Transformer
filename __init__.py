@@ -8,6 +8,24 @@ from .luong_attention import LuoAttn, LuongAttention
 from .multihead_attention import MHAttn, MultiHeadAttention
 from .positional_encoding import PEnc, PositionalEncoding
 from .self_attention import SelfAttention
+from .token_embedding import Embedding
+from .tokenizer import WhitespaceTokenizer
+from .transformer_pipeline import (
+    Pipeline,
+    PipelineConfig,
+    TransformerPipeline,
+    TransformerPipelineConfig,
+    average_attention_heads,
+)
+from .transformer_outputs import (
+    AttentionOutput,
+    AttentionPreviews,
+    PipelineForwardOutput,
+    PipelineReport,
+    PipelineSummary,
+    PreparedBatch,
+    TransformerOutput,
+)
 from .transformer_architecture import Arch, TransformerArchitecture
 from .toy_trainer import ToyTrainer
 
@@ -28,8 +46,22 @@ __all__ = [
     "PEnc",
     "PositionalEncoding",
     "SelfAttention",
+    "Embedding",
+    "WhitespaceTokenizer",
     "AttnViz",
     "ToyTrainer",
+    "AttentionOutput",
+    "TransformerOutput",
+    "PipelineSummary",
+    "PreparedBatch",
+    "PipelineForwardOutput",
+    "AttentionPreviews",
+    "PipelineReport",
+    "average_attention_heads",
+    "PipelineConfig",
+    "TransformerPipelineConfig",
+    "Pipeline",
+    "TransformerPipeline",
     "Arch",
     "TransformerArchitecture",
 ]
